@@ -24,8 +24,7 @@ namespace :scrape do
       not_founds = 0
       invalid_data = 0
       @jobs = []
-      #Company.all.map.with_index do |company, i|
-      Company.where(name: "Scribd").all.map.with_index do |company, i|
+      Company.last(400).map.with_index do |company, i|
         p "Fetching #{company.name}"
         p "#{i}/#{Company.count}"
         begin
@@ -44,6 +43,10 @@ namespace :scrape do
           end
         rescue OpenURI::HTTPError => e
           not_founds += 1
+        rescue Exception => e
+          p e.message
+          p e.backtrace.inspect
+          p "Continuing despite error"
         end
       end
       p "Source: #{source}"

@@ -1,6 +1,6 @@
 class Scrapper
   def self.scrape_lever_page(company_name)
-    url = "https://jobs.lever.co/#{company_name}"
+    url = "https://jobs.lever.co/#{s(company_name)}"
     doc = Nokogiri::HTML(open(url))
     posts = doc.css(".posting-title")
     jobs = posts.map do |post|
@@ -21,7 +21,7 @@ class Scrapper
   end
 
   def self.scrape_greenhouse_page(company_name)
-    url = "https://boards.greenhouse.io/#{company_name}"
+    url = "https://boards.greenhouse.io/#{s(company_name)}"
     doc = Nokogiri::HTML(open(url))
     posts = doc.css(".opening")
     jobs = posts.map do |post|
@@ -40,7 +40,7 @@ class Scrapper
   end
 
   def self.scrape_angel_list_page(company_name)
-    url = "https://angel.co/#{company_name}/jobs"
+    url = "https://angel.co/#{s(company_name)}/jobs"
     p url
     debugger
     doc = Nokogiri::HTML(open(url))
@@ -63,5 +63,9 @@ class Scrapper
       serialized
     end
     jobs
+  end
+
+  def self.s(name)
+    URI.escape(name.gsub(" ", "").downcase)
   end
 end
