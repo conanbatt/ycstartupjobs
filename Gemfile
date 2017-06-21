@@ -12,6 +12,7 @@ gem 'nokogiri'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'pg_search'
+gem 'seed_dump'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
