@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620230903) do
+ActiveRecord::Schema.define(version: 20170621014516) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "pg_trgm"
+  enable_extension "fuzzystrmatch"
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -21,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170620230903) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_companies_on_name"
     t.index ["url"], name: "index_companies_on_url"
   end
 
@@ -32,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170620230903) do
     t.string "description"
     t.string "salary"
     t.string "url"
-    t.integer "company_id"
+    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_job_openings_on_company_id"

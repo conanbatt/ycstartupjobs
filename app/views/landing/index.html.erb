@@ -1,0 +1,16 @@
+<div class="home">
+  <div class="header_section">
+    <div class="container">
+      <p class="lead text-muted text-center"> Find YCombinator Startups Jobs</p>
+      <div class="form-group search_box">
+        <input type="text" class="input-lg form-control insta_search" placeholder="Search by Title or Location...">
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="jobs_container">
+      <%= render 'jobs', jobs: @jobs %>
+    </div>
+  </div>
+</div>
