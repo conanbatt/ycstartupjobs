@@ -5,12 +5,29 @@
       <div class="form-group search_box">
         <input type="text" class="input-lg form-control insta_search" placeholder="Search by Title, Location, Company or Team...">
       </div>
+
+      <div class="tags">
+      <label class="text-muted">Tech & Stack</label>
+        <div class="tech">
+          <% colors = ["primary", "warning", "danger", "success"] %>
+          <% JobOpening::TECH.each_with_index do |tech, i| %>
+            <span data-tag=<%= tech %> class="tech_btn btn btn-outline btn-<%= colors[i % 4] %>"><%= tech %></span>
+          <% end %>
+        </div>
+        <label class="text-muted">Responsibilities</label>
+        <div class="responsibilities">
+          <% colors = ["primary", "warning", "danger", "success"] %>
+          <% JobOpening::RESPONSIBILITIES.each_with_index do |resp, i| %>
+            <span data-tag=<%= resp %> class="tech_btn btn btn-outline btn-<%= colors[i % 4] %>"><%= resp %></span>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="container">
     <div class="jobs_container">
-      <%= render 'jobs', jobs: @jobs %>
+      <%= render 'jobs', jobs: @jobs, jobs_count: @jobs_count %>
     </div>
   </div>
 </div>

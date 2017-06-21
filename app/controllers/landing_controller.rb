@@ -1,18 +1,27 @@
 class LandingController < ApplicationController
 
   def index
-    @jobs = JobOpening.includes(:company).first(20)
+    @jobs = JobOpening.joins(:company).distinct.includes(:company)
+    @jobs_count = @jobs.count
   end
 
   def search
     query = params[:q]
-    @jobs = if(query.blank?)
-      JobOpening.includes(:company).first(20)
+    tags = params[:tags] || []
+
+    @jobs = if(query.present? && tags.present?)
+      JobOpening.search(query).search_exact(tags)
+    elsif query.present? && !tags.present?
+      JobOpening.search(query)
+    elsif tags.present?
+      JobOpening.search_exact(tags)
     else
-      @jobs = JobOpening.search(query)
-      @jobs.preload(:company)
+      JobOpening.joins(:company).distinct.includes(:company)
     end
 
-    render template: "landing/_jobs", locals: { jobs: @jobs }, layout: false
+    @jobs.preload(:company)
+    @jobs_count = @jobs.count
+
+    render template: "landing/_jobs", locals: {  jobs_count: @jobs_count, jobs: @jobs }, layout: false
   end
 end
