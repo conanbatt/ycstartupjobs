@@ -21,6 +21,13 @@
             <span data-tag=<%= resp %> class="tech_btn btn btn-outline btn-<%= colors[i % 4] %>"><%= resp %></span>
           <% end %>
         </div>
+        <label class="text-muted">Fields</label>
+        <div class="fields">
+          <% colors = ["primary", "warning", "danger", "success"] %>
+          <% JobOpening::FIELDS.each_with_index do |resp, i| %>
+            <span data-tag=<%= resp %> class="tech_btn btn btn-outline btn-<%= colors[i % 4] %>"><%= resp %></span>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
