@@ -1,4 +1,3 @@
-
 namespace :scrape do
   desc "Fetch Single Company Jobs from Lever"
   task :lever, [:company_name] => :environment do |t,args|
@@ -24,14 +23,13 @@ namespace :scrape do
       not_founds = 0
       invalid_data = 0
       @jobs = []
-      Company.last(400).map.with_index do |company, i|
+      Company.all.map.with_index do |company, i|
         p "Fetching #{company.name}"
         p "#{i}/#{Company.count}"
         begin
           Rake::Task["scrape:#{source}"].execute(company_name: company.name.downcase)
           p "Jobs Found: #{@jobs.length}"
           @jobs.map do |job|
-            #debugger
             if(job[:url])
               job[:company_id] = company.id
               JobOpening
