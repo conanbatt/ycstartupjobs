@@ -8,15 +8,17 @@ class LandingController < ApplicationController
   def search
     query = params[:q]
     tags = params[:tags] || []
+    company_exclusions = params[:companies] || []
 
+    relation = JobOpening.where.not(company_id: company_exclusions)
     @jobs = if(query.present? && tags.present?)
-      JobOpening.search(query).search_exact(tags)
+      relation.search(query).search_exact(tags)
     elsif query.present? && !tags.present?
-      JobOpening.search(query)
+      relation.search(query)
     elsif tags.present?
-      JobOpening.search_exact(tags)
+      relation.search_exact(tags)
     else
-      JobOpening.joins(:company).distinct.includes(:company)
+      relation.joins(:company).distinct.includes(:company)
     end
 
     @jobs.preload(:company)

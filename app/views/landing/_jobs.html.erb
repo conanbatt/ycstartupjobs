@@ -8,7 +8,11 @@
       <div class="thumbnail job">
         <div class="caption">
           <h4 class="job_title single_line"><a target="_blank" href=<%= job.url %>><%= job.title %></a></h4>
-          <p><span class="text-muted">by </span> <a target="_blank" href=<%= job.company.url %>><%= job.company.name %></a></p>
+          <p>
+            <span class="text-muted">by </span>
+            <a target="_blank" data-id=<%=job.company.id%> href=<%= job.company.url %>><%= job.company.name %></a>
+            <small><a href="#" class="exclude_company text-danger" data-name=<%= job.company.name %> data-id=<%=job.company.id%>>(exclude company)</a></small>
+          </p>
           <p>
             <span class="label label-primary"><%= job.team %></span>
             <span class="label label-success"><%= job.location %></span>
