@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  http_basic_authenticate_with name: "ycombinatortest", password: "ycombinatortest"
 
   # GET /companies
   # GET /companies.json

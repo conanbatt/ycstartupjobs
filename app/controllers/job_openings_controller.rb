@@ -1,5 +1,6 @@
 class JobOpeningsController < ApplicationController
   before_action :set_job_opening, only: [:show, :edit, :update, :destroy]
+  http_basic_authenticate_with name: "ycombinatortest", password: "ycombinatortest"
 
   # GET /job_openings
   # GET /job_openings.json
