@@ -14,6 +14,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$ycombinator_orange: #f26522;
+
 .header_section {
     /* border-bottom: 1px solid #c7c7c7;
     margin-bottom: 15px; */
@@ -70,4 +72,9 @@
 
 .search_sticky {
     margin-top: 56px;
+}
+
+.bg-ycombinator {
+    background: $ycombinator_orange;
+    color: white;
 }
