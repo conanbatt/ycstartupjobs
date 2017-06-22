@@ -41,24 +41,21 @@ class Scrapper
 
   def self.scrape_angel_list_page(company_name)
     url = "https://angel.co/#{s(company_name)}/jobs"
-    p url
-    debugger
-    doc = Nokogiri::HTML(open(url))
+    doc = Nokogiri::HTML(open(url, "User-Agent" => "Im scrapping yo"))
     posts = doc.css(".job-listing-role")
     jobs = posts.map do |post|
-
-      meta = post.at_css(".listing_data").split("·")
+      meta = post.at_css(".listing-data").text.split("·").map(&:strip)
       serialized = {
         title: post.at_css(".group").text,
         team: post.at_css(".listing-title a").text,
         location: meta.first,
         url: post.at_css(".listing-title a")['href'],
         commitment: meta[1],
-        salary: meta[meta.length - 2] + meta.last,
+        salary: meta[2] + "·" + meta[3],
       }
 
-      description_doc = Nokogiri::HTML(open(serialized[:url]))
-      desc = description_doc.at_css("#content")
+      description_doc = Nokogiri::HTML(open(serialized[:url], "User-Agent" => "Im scrapping yo"))
+      desc = description_doc.at_css(".job-description")
       serialized[:text] = desc.text.strip
       serialized
     end
