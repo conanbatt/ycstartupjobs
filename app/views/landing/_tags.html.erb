@@ -1,0 +1,6 @@
+<div class="tags_row">
+  <% colors = ["primary", "warning", "danger", "success"] %>
+  <% tags.each_with_index do |tag, i| %>
+    <span data-tag=<%= tag %> class="tech_btn btn btn-outline btn-sm btn-<%= colors[i % 4] %>"><%= tag %></span>
+  <% end %>
+</div>

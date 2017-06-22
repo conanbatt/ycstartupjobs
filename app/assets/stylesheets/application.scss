@@ -25,6 +25,12 @@
     }
 }
 
+.single_line {
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+}
+
 .btn-outline {
     background-color: transparent;
     color: inherit;
@@ -56,4 +62,12 @@
 .tech_btn {
     margin-right: 15px;
     margin-bottom: 10px;
+}
+
+.sticky {
+    position: sticky;
+}
+
+.search_sticky {
+    margin-top: 56px;
 }

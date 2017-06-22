@@ -44,6 +44,8 @@ class Search
       @update()
     )
 
+    @root.find(".stick_in_parent").stick_in_parent({ parent: ".sticky_parent", offset_top: -30});
+
   params: ->
     {
       q: @query,

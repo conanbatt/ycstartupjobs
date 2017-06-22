@@ -1,40 +1,45 @@
 <div class="home">
   <div class="header_section">
     <div class="container">
-      <p class="lead text-muted text-center"> Find YCombinator Startups Jobs</p>
-      <div class="form-group search_box">
-        <input type="text" class="input-lg form-control insta_search" placeholder="Search by Title, Location, Company or Team...">
+      <div class="jumbotron bg-primary">
+        <h1> Find YCombinator Startups Jobs </h1>
+        <p class="lead text-muted"> Search and filter job openings by YCombinator startups </p>
       </div>
 
-      <div class="tags">
-      <label class="text-muted">Tech & Stack</label>
-        <div class="tech">
-          <% colors = ["primary", "warning", "danger", "success"] %>
-          <% JobOpening::TECH.each_with_index do |tech, i| %>
-            <span data-tag=<%= tech %> class="tech_btn btn btn-outline btn-<%= colors[i % 4] %>"><%= tech %></span>
-          <% end %>
-        </div>
-        <label class="text-muted">Responsibilities</label>
-        <div class="responsibilities">
-          <% colors = ["primary", "warning", "danger", "success"] %>
-          <% JobOpening::RESPONSIBILITIES.each_with_index do |resp, i| %>
-            <span data-tag=<%= resp %> class="tech_btn btn btn-outline btn-<%= colors[i % 4] %>"><%= resp %></span>
-          <% end %>
-        </div>
-        <label class="text-muted">Fields</label>
-        <div class="fields">
-          <% colors = ["primary", "warning", "danger", "success"] %>
-          <% JobOpening::FIELDS.each_with_index do |resp, i| %>
-            <span data-tag=<%= resp %> class="tech_btn btn btn-outline btn-<%= colors[i % 4] %>"><%= resp %></span>
-          <% end %>
-        </div>
-      </div>
+
     </div>
   </div>
 
   <div class="container">
-    <div class="jobs_container">
-      <%= render 'jobs', jobs: @jobs, jobs_count: @jobs_count %>
-    </div>
+    <div class="row sticky_parent">
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+        <div class="jobs_container">
+          <%= render 'jobs', jobs: @jobs, jobs_count: @jobs_count %>
+        </div>
+      </div>
+
+        <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+          <div class="stick_in_parent search_sticky">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="search_controls">
+                <div class="form-group search_box">
+                  <label class="text-muted">Filter Job Openings</label>
+                  <input type="text" class="input-sm form-control insta_search" placeholder="Filter by title, location, company or team...">
+                </div>
+
+                <div class="tags">
+                  <label class="text-muted">Tech & Stack</label>
+                  <%= render 'tags', tags: JobOpening::TECH %>
+                  <label class="text-muted">Responsibilities</label>
+                  <%= render 'tags', tags: JobOpening::RESPONSIBILITIES %>
+                  <label class="text-muted">Fields</label>
+                  <%= render 'tags', tags: JobOpening::FIELDS %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </div>

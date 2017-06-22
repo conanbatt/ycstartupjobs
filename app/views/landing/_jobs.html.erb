@@ -7,13 +7,13 @@
     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 ">
       <div class="thumbnail job">
         <div class="caption">
-          <h4><a target="_blank" href=<%= job.url %>><%= job.title %></a></h4>
+          <h4 class="job_title single_line"><a target="_blank" href=<%= job.url %>><%= job.title %></a></h4>
           <p><span class="text-muted">by </span> <a target="_blank" href=<%= job.company.url %>><%= job.company.name %></a></p>
           <p>
             <span class="label label-primary"><%= job.team %></span>
             <span class="label label-success"><%= job.location %></span>
           </p>
-          <p class="job_description"><%= truncate(job.description, length: 200) %></p>
+          <p class="job_description"><%= truncate(job.description, length: 180) %></p>
         </div>
       </div>
     </div>
